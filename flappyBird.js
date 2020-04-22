@@ -41,6 +41,28 @@ var scor = new Audio();
 fly.src = "sounds/fly.mp3";
 scor.src = "sounds/score.mp3";
 
+
+//Stick
+
+var Stick = function(x, y, name) {
+    this.x = x;
+    this.y = y; 
+    this.name = name;
+};
+
+Stick.prototype.draw = function() {
+	//??   
+};
+
+// random sticks distribution
+var verbs = ["run", "jump", "hit", "dance", "draw", "fly", "destory"];
+var nouns = ["dog", "boy", "house","farm", "phone", "Plane", "Doctor"];
+var sticks = [];
+for (var i = 0; i < 20; i++) {  
+    sticks.push(new Stick(i * 161 + 250, Math.floor(Math.random() * (400 - 10 + 1)) + 10, nouns[i]));
+    sticks.push(new Stick(i * 161 + 200, Math.floor(Math.random() * (400 - 10 + 1)) + 10, verbs[i]));
+}
+
 //on key down
 
 document.addEventListener("keydown", moveUp);
@@ -65,10 +87,23 @@ pipe [0] = {
 
 function draw() {
 
+	 //controls speed of sticks moving accross screen
+    
+
 //This code is possibly redudant, need to figure out scopping issues.
 var constant = pipeNorth.height+gap;
 
 	ctx.drawImage(bg, 0, 0);
+
+	
+
+	for (var i = 0; i < sticks.length; i++) {
+        ctx.fillText(sticks[i].name, sticks[i].x, sticks[i].y)
+        //beaver.checkForStickGrab(sticks[i]);
+        sticks[i].x -= 1;
+    }
+
+    console.log(sticks);
 
 	//This loop makes the pipes move to the left
 	for (var i =0;  i < pipe.length; i++) {
@@ -78,7 +113,7 @@ var constant = pipeNorth.height+gap;
 	pipe[i].x--;
 
 	//this loop controls the randomized heights of the pipes
-	if (pipe[i].x == 125) {
+	if (pipe[i].x == -125) {
 		pipe.push({
 			x : cvs.width,
 			y : Math.floor(Math.random()*pipeNorth.height)- pipeNorth.height
@@ -91,6 +126,8 @@ var constant = pipeNorth.height+gap;
 	if( bX + bird.width >= pipe[i].x 
 		&& bX <= pipe[i].x + pipeNorth.width 
 		&& (bY <= pipe[i].y + pipeNorth.height 
+
+
 
 		|| bY+bird.height >= pipe[i].y+constant) 
 		|| bY + bird.height >=  cvs.height - fg.height){
@@ -114,7 +151,11 @@ var constant = pipeNorth.height+gap;
 
 	ctx.fillStyle ="#000",
 	ctx.font = "20px Verdana";
+	ctx.fillText("Find: " + score, 100, cvs.height-80);
 	ctx.fillText("Score: " + score, 10, cvs.height-20);
+	ctx.fillText("Lives: " + score, 200, cvs.height-20);
+
+
 
 
 
