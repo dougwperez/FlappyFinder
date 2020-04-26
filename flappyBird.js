@@ -229,7 +229,7 @@ if (words2[i].x <= -20){
 
 	if (lives == 0) {
 		hit.play();
-		setTimeout(function(){location.reload()}, 800);
+		location.reload();
 	};
 
 
@@ -277,7 +277,7 @@ if (words2[i].x <= -20){
 		|| bY + bird.height >=  cvs.height - fg.height){
 
 			hit.play();
-		  setTimeout(function(){location.reload()}, 250);
+		  location.reload();
         };
 
         if(pipe[i].x == 25) {
