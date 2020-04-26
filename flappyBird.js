@@ -5,6 +5,15 @@ var ctx = cvs.getContext("2d");
 
 
 
+var randomnum = Math.floor(Math.random() * 3) + 1;
+console.log(randomnum);
+
+
+
+
+
+
+
 
 // load images
 
@@ -34,8 +43,9 @@ var gravity = 1.5;
 
 var score = 0;
 var lives = 3;
+var find = "";
 
-console.log(lives);
+
 
 // audio files
 var fly = new Audio();
@@ -49,7 +59,7 @@ wrong.src = "sounds/wrong.wav";
 hit.src = "sounds/hit.mp3"
 
 
-//word
+//word constructor
 var word = function(x, y, name) {
     this.x = x;
     this.y = y; 
@@ -57,17 +67,16 @@ var word = function(x, y, name) {
     
 };
 
-var word2 = function(x, y, name) {
-    this.x = x;
-    this.y = y; 
-    this.name = name;
-    
-};
+
 
 // random words distribution
 var adjectives = ["pretty", "amazing", "smart", "funny", "heroic", "brave", "shiny"];
 var verbs = ["run", "jump", "hit", "dance", "draw", "fly", "destory"];
 var nouns = ["dog", "boy", "house","farm", "phone", "plane", "doctor"];
+
+
+var words2 = [];
+var words = [];   
 
 //shuffle calls
 shuffleArray(adjectives);
@@ -75,23 +84,69 @@ shuffleArray(nouns);
 shuffleArray(verbs);
 
 
-var words2 = [];
-var words = [];
 
+if (randomnum==1){
+	
+	var find = "Nouns";
+	var wrongs = adjectives.concat(verbs);
 
-//right loop
-for (var i = 0; i < 20; i++) {  
+	for (var i = 0; i < 20; i++) {  
     words.push(new word(i * 161 + 200, Math.floor(Math.random() * (400 - 10 + 1)) + 10, nouns[i]));
     
 }
+}
+
+else if (randomnum==2) {
+
+	var find = "Adjectives";
+	var wrongs = nouns.concat(verbs);
+
+for (var i = 0; i < 20; i++) {  
+    words.push(new word(i * 161 + 200, Math.floor(Math.random() * (400 - 10 + 1)) + 10, adjectives[i]));
+
+}
+}
+
+else if (randomnum==3) {
+	var find = "Verbs"
+	var wrongs = adjectives.concat(nouns);
+
+for (var i = 0; i < 20; i++) {  
+    words.push(new word(i * 161 + 200, Math.floor(Math.random() * (400 - 10 + 1)) + 10, verbs[i]));
+
+}
+}
+
+
+
+
+console.log(wrongs);
+
+
+
+
+
+
+shuffleArray(wrongs);
+
+
+
+
+
+//right loop
+
+ 
 
 //wrong loop
 
 for (var i = 0; i < 20; i++) {  
+	words2.push(new word(i * 161 + 250, Math.floor(Math.random() * (400 - 10 + 1)) + 10, wrongs[i]));
     
-    words2.push(new word2(i * 161 + 250, Math.floor(Math.random() * (400 - 10 + 1)) + 10, verbs[i]));
-    words2.push(new word2(i * 161 + 250, Math.floor(Math.random() * (400 - 10 + 1)) + 10, adjectives[i]));
+    
 }
+
+
+
 
 
 
@@ -134,8 +189,7 @@ function shuffleArray(adjectives) {
 
 
 
-console.log(words);
-console.log(words2);
+
 
 //on key down
 
@@ -201,7 +255,7 @@ for (var i = 0; i < words2.length; i++) {
 	  } 
 	
 
-console.log(word);
+
 	//detect collision
 
 	
@@ -216,12 +270,12 @@ if (words2[i].x <= -20){
 
 		
 		if ( bX + bird.width >= words2[i].x 
-		&& bX + bird.width <= words2[i].x + 40
+		&& bX + bird.width <= words2[i].x + 50
 		&& bY+bird.height >= words2[i].y
 		&& bY+bird.height <= words2[i].y + 40){
 
 		
-		words2.shift();
+		words2.splice([i], 1);
 
 		lives --;              
         wrong.play();
@@ -229,18 +283,8 @@ if (words2[i].x <= -20){
 
 	if (lives == 0) {
 		hit.play();
-		location.reload();
+		setTimeout(function(){location.reload()}, 800);
 	};
-
-
-
-
-
-
-
-
-
-
 	
 //correct collision
 
@@ -251,7 +295,7 @@ if (words2[i].x <= -20){
 		}
 
 		if ( bX + bird.width >= words[i].x 
-		&& bX + bird.width <= words[i].x + 40
+		&& bX + bird.width <= words[i].x + 50
 		&& bY+bird.height >= words[i].y
 		&& bY+bird.height <= words[i].y + 40){
 
@@ -277,7 +321,7 @@ if (words2[i].x <= -20){
 		|| bY + bird.height >=  cvs.height - fg.height){
 
 			hit.play();
-		  location.reload();
+		  setTimeout(function(){location.reload()}, 250);
         };
 
         if(pipe[i].x == 25) {
@@ -297,7 +341,7 @@ if (words2[i].x <= -20){
 
 	ctx.fillStyle ="#000",
 	ctx.font = "20px Verdana";
-	ctx.fillText("Find: Nouns " , 100, cvs.height-80);
+	ctx.fillText("  "+ find, 100, cvs.height-80);
 	ctx.fillText("Score: " + score, 10, cvs.height-20);
 	ctx.fillStyle ="#ff0000",
 	ctx.fillText("Lives: " + lives, 200, cvs.height-20);
