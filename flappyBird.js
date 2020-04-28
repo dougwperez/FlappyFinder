@@ -299,7 +299,7 @@ function draw() {
       hit.play();
       setTimeout(function () {
         location.reload();
-      }, 800);
+      }, 100);
     }
 
     //correct collision
@@ -333,7 +333,7 @@ function draw() {
       hit.play();
       setTimeout(function () {
         location.reload();
-      }, 100);
+      }, 0);
     }
 
     if (pipe[i].x == 25) {
