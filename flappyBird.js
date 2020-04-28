@@ -324,7 +324,7 @@ function draw() {
     //pipes collision detection
 
     if (
-      (bX + bird.width = pipe[i].x &&
+      (bX + bird.width >= pipe[i].x &&
         bX <= pipe[i].x + pipeNorth.width &&
         (bY <= pipe[i].y + pipeNorth.height ||
           bY + bird.height >= pipe[i].y + constant)) ||
