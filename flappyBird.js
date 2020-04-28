@@ -328,7 +328,7 @@ function draw() {
         bX <= pipe[i].x + pipeNorth.width &&
         (bY <= pipe[i].y + pipeNorth.height ||
           bY + bird.height >= pipe[i].y + constant)) ||
-      bY + bird.height >= cvs.height - fg.height
+      bY + bird.height = cvs.height - fg.height
     ) {
       hit.play();
       setTimeout(function () {
