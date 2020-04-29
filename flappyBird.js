@@ -351,13 +351,37 @@ function draw() {
 
   bY += gravity;
 
-  (ctx.fillStyle = "#0000d6"), (ctx.font = "20px Verdana");
+(ctx.fillStyle = "#0000d6"), (ctx.font = "20px Verdana");
   ctx.fillText("Find the " + find, 60, cvs.height - 80);
   (ctx.fillStyle = "#000"), (ctx.font = "20px Verdana");
   ctx.fillText("Score: " + score, 10, cvs.height - 20);
   (ctx.fillStyle = "#ff0000"),
-    ctx.fillText("Lives: " + lives, 200, cvs.height - 20);
+    ctx.fillText(""  , 200, cvs.height - 10);
   (ctx.fillStyle = "#000"), requestAnimationFrame(draw);
+  ctx.drawImage(bird, 165, cvs.height - 42);
+  ctx.drawImage(bird, 205, cvs.height - 42);
+  ctx.drawImage(bird, 245, cvs.height - 42);
+  
+  console.log(lives);
+
+
+  
+
+  function lifecount() {
+  (ctx.fillStyle = "#ff0000"),
+  ctx.font = "40px Arial";
+    return (lives == 2) ? ctx.fillText("X"  , 170, cvs.height - 16)
+         : (lives == 1) ? ctx.fillText("X" + " X", 170, cvs.height - 16) 
+         : (lives == 0) ? ctx.fillText("X" + " X" + " X", 170, cvs.height - 16)
+     	   : ctx.fillText(""  , 200, cvs.height - 10); }
+     	 (ctx.fillStyle = "#000"), (ctx.font = "20px Verdana");
+     	 lifecount();
+     	 (ctx.fillStyle = "#000"), (ctx.font = "20px Verdana");
+         
+
+
+
 }
 
 draw();
+
