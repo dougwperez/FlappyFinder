@@ -304,9 +304,7 @@ function draw() {
 
     //correct collision
     
-    function myFunction() {
-  location.replace("https://dougwperez.github.io/FlappyFinder/")
-}
+   
 
     //shifts the array
     if (words[i].x <= -125) {
@@ -335,10 +333,10 @@ function draw() {
       bY + bird.height >= cvs.height - fg.height
     ) {
       hit.play();
-      myFunction();
-      //setTimeout(function () {
-        //location.reload();
-      //}, 0);
+      
+      setTimeout(function () {
+        location.replace("https://dougwperez.github.io/FlappyFinder/");
+      }, 200);
     }
 
     if (pipe[i].x == 25) {
