@@ -285,7 +285,7 @@ function draw() {
 
     if (
       bX + bird.width >= words2[i].x &&
-      bX + bird.width <= words2[i].x + 55 &&
+      bX + bird.width <= words2[i].x + 60 &&
       bY + bird.height >= words2[i].y &&
       bY + bird.height <= words2[i].y + 40
     ) {
@@ -313,7 +313,7 @@ function draw() {
 
     if (
       bX + bird.width >= words[i].x &&
-      bX + bird.width <= words[i].x + 55 &&
+      bX + bird.width <= words[i].x + 60 &&
       bY + bird.height >= words[i].y &&
       bY + bird.height <= words[i].y + 40
     ) {
