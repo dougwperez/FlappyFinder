@@ -298,8 +298,8 @@ function draw() {
     if (lives == 0) {
       hit.play();
       setTimeout(function () {
-        location.reload();
-      }, 100);
+        location.replace("https://dougwperez.github.io/FlappyFinder/");
+      }, 250);
     }
 
     //correct collision
@@ -336,7 +336,7 @@ function draw() {
       
       setTimeout(function () {
         location.replace("https://dougwperez.github.io/FlappyFinder/");
-      }, 200);
+      }, 250);
     }
 
     if (pipe[i].x == 25) {
