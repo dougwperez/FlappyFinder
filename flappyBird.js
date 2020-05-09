@@ -42,6 +42,7 @@ fly.src = "sounds/fly.mp3";
 scor.src = "sounds/score.mp3";
 wrong.src = "sounds/wrong.wav";
 hit.src = "sounds/hit.mp3";
+hit.loop = false;
 
 //word constructor
 var word = function (x, y, name) {
@@ -74,6 +75,26 @@ var adjectives = [
   "real",
   "strong",
   "young",
+  "delirious",
+  "condemned",
+  "exotic",
+  "tacit",
+  "rustic",
+  "beautiful",
+  "parched",
+  "dirty",
+  "mysterious",
+  "dependent",
+  "assorted",
+  "amuck",
+  "spotless",
+  "angry",
+  "dramatic",
+  "naughty",
+  "volatile",
+  "tough",
+  "amuck",
+  "goofy",
 ];
 var verbs = [
   "run",
@@ -98,6 +119,26 @@ var verbs = [
   "sweep",
   "swim",
   "take",
+  "brush",
+  "knit",
+  "grab",
+  "frame",
+  "risk",
+  "appreciate",
+  "explain",
+  "include",
+  "learn",
+  "rule",
+  "advise",
+  "collect",
+  "cross",
+  "admit",
+  "sparkle",
+  "borrow",
+  "disarm",
+  "drip",
+  "reply",
+  "decide",
 ];
 var nouns = [
   "dog",
@@ -122,6 +163,26 @@ var nouns = [
   "day",
   "air",
   "home",
+  "vessel",
+  "self",
+  "harbor",
+  "sofa",
+  "dock",
+  "society",
+  "transport",
+  "bulb",
+  "arms",
+  "motion",
+  "pin",
+  "flowers",
+  "neck",
+  "teeth",
+  "brass",
+  "cakes",
+  "women",
+  "string",
+  "bed",
+  "farm",
 ];
 
 var words2 = [];
@@ -132,7 +193,7 @@ shuffleArray(adjectives);
 shuffleArray(nouns);
 shuffleArray(verbs);
 
-
+//REYJUQ
 
 if (randomnum == 1) {
   var find = "Nouns";
@@ -175,12 +236,7 @@ if (randomnum == 1) {
   }
 }
 
-console.log(wrongs);
-
 shuffleArray(wrongs);
-
-
-
 
 //wrong loop, note that the correct answers loop is stored in the if then statements above.
 
@@ -244,8 +300,6 @@ pipe[0] = {
 // draw images
 
 function draw() {
-  //controls speed of words moving accross screen
-
   //This code is possibly redudant, need to figure out scopping issues.
   var constant = pipeNorth.height + gap;
 
@@ -253,12 +307,12 @@ function draw() {
 
   for (var i = 0; i < words.length; i++) {
     ctx.fillText(words[i].name, words[i].x, words[i].y);
-    words[i].x--;
+    words[i].x -= 1.18;
   }
 
   for (var i = 0; i < words2.length; i++) {
     ctx.fillText(words2[i].name, words2[i].x, words2[i].y);
-    words2[i].x--;
+    words2[i].x -= 1.18;
   }
 
   //This loop makes the pipes move to the left
@@ -282,10 +336,10 @@ function draw() {
     if (words2[i].x <= -125) {
       words2.shift();
     }
-
+    //edit  bX + bird.width <= words2[i].x +  to accomodate longer words
     if (
       bX + bird.width >= words2[i].x &&
-      bX + bird.width <= words2[i].x + 60 &&
+      bX + bird.width <= words2[i].x + 70 &&
       bY + bird.height >= words2[i].y &&
       bY + bird.height <= words2[i].y + 40
     ) {
@@ -297,23 +351,24 @@ function draw() {
 
     if (lives == 0) {
       hit.play();
+      bY += 0.5;
       setTimeout(function () {
-        location.replace("https://dougwperez.github.io/FlappyFinder/");
+        location.replace(
+          "file:///Users/douglasperez/Desktop/Projects/flappyBird%20-%20starter%20Template/index.html"
+        );
       }, 250);
     }
 
     //correct collision
-    
-   
 
     //shifts the array
     if (words[i].x <= -125) {
       words.shift();
     }
-
+    //edit  bX + bird.width <= words2[i].x +  to accomodate longer words
     if (
       bX + bird.width >= words[i].x &&
-      bX + bird.width <= words[i].x + 60 &&
+      bX + bird.width <= words[i].x + 70 &&
       bY + bird.height >= words[i].y &&
       bY + bird.height <= words[i].y + 40
     ) {
@@ -333,9 +388,11 @@ function draw() {
       bY + bird.height >= cvs.height - fg.height
     ) {
       hit.play();
-      
+
       setTimeout(function () {
-        location.replace("https://dougwperez.github.io/FlappyFinder/");
+        location.replace(
+          "file:///Users/douglasperez/Desktop/Projects/flappyBird%20-%20starter%20Template/index.html"
+        );
       }, 250);
     }
 
@@ -351,37 +408,31 @@ function draw() {
 
   bY += gravity;
 
-(ctx.fillStyle = "#0000d6"), (ctx.font = "20px Verdana");
+  (ctx.fillStyle = "#0000d6"), (ctx.font = "20px Verdana");
   ctx.fillText("Find the " + find, 60, cvs.height - 80);
   (ctx.fillStyle = "#000"), (ctx.font = "20px Verdana");
   ctx.fillText("Score: " + score, 10, cvs.height - 20);
-  (ctx.fillStyle = "#ff0000"),
-    ctx.fillText(""  , 200, cvs.height - 10);
+  (ctx.fillStyle = "#ff0000"), ctx.fillText("", 200, cvs.height - 10);
   (ctx.fillStyle = "#000"), requestAnimationFrame(draw);
   ctx.drawImage(bird, 165, cvs.height - 42);
   ctx.drawImage(bird, 205, cvs.height - 42);
   ctx.drawImage(bird, 245, cvs.height - 42);
-  
+
   console.log(lives);
 
-
-  
-
   function lifecount() {
-  (ctx.fillStyle = "#ff0000"),
-  ctx.font = "40px Arial";
-    return (lives == 2) ? ctx.fillText("X"  , 170, cvs.height - 16)
-         : (lives == 1) ? ctx.fillText("X" + " X", 170, cvs.height - 16) 
-         : (lives == 0) ? ctx.fillText("X" + " X" + " X", 170, cvs.height - 16)
-     	   : ctx.fillText(""  , 200, cvs.height - 10); }
-     	 (ctx.fillStyle = "#000"), (ctx.font = "20px Verdana");
-     	 lifecount();
-     	 (ctx.fillStyle = "#000"), (ctx.font = "20px Verdana");
-         
-
-
-
+    (ctx.fillStyle = "#ff0000"), (ctx.font = "40px Arial");
+    return lives == 2
+      ? ctx.fillText("X", 170, cvs.height - 16)
+      : lives == 1
+      ? ctx.fillText("X" + " X", 170, cvs.height - 16)
+      : lives == 0
+      ? ctx.fillText("X" + " X" + " X", 170, cvs.height - 16)
+      : ctx.fillText("", 200, cvs.height - 10);
+  }
+  (ctx.fillStyle = "#000"), (ctx.font = "20px Verdana");
+  lifecount();
+  (ctx.fillStyle = "#000"), (ctx.font = "20px Verdana");
 }
 
 draw();
-
