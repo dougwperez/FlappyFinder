@@ -354,7 +354,7 @@ function draw() {
       bY += 0.5;
       setTimeout(function () {
         location.replace(
-          "file:///Users/douglasperez/Desktop/Projects/flappyBird%20-%20starter%20Template/index.html"
+          "https://dougwperez.github.io/FlappyFinder/"
         );
       }, 250);
     }
@@ -391,7 +391,7 @@ function draw() {
 
       setTimeout(function () {
         location.replace(
-          "file:///Users/douglasperez/Desktop/Projects/flappyBird%20-%20starter%20Template/index.html"
+          "https://dougwperez.github.io/FlappyFinder/"
         );
       }, 250);
     }
