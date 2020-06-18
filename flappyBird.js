@@ -39,10 +39,13 @@ var wrong = new Audio();
 var hit = new Audio();
 
 fly.src = "sounds/fly.mp3";
+fly.volume = 0.1;
 scor.src = "sounds/score.mp3";
+scor.volume = 0.1;
 wrong.src = "sounds/wrong.wav";
+wrong.volume = 0.1;
 hit.src = "sounds/hit.mp3";
-hit.loop = false;
+hit.volume = 0.1;
 
 //word constructor
 var word = function (x, y, name) {
